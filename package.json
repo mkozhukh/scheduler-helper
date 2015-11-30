@@ -1,0 +1,28 @@
+{
+  "name": "scheduler-helper",
+  "version": "1.0.0",
+  "description": "Operations with recurring events for DHTMLX Scheduler and Webix Scheduler",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkozhukh/scheduler-helper.git"
+  },
+  "keywords": [
+    "scheduler",
+    "helper",
+    "dhtmlx",
+    "webix"
+  ],
+  "author": "Maksim Kozhukh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mkozhukh/scheduler-helper/issues"
+  },
+  "homepage": "https://github.com/mkozhukh/scheduler-helper#readme",
+  "devDependencies": {
+    "chai": "^3.4.1"
+  }
+}
