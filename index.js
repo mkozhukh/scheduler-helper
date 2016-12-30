@@ -23,9 +23,9 @@ function getEvents(data, from, to){
 	//process events
 	for (var i=0; i<data.length; i++){
 		var ev = data[i];
-        //events with rec_type none are deleted occurances from recurring events and should be ignored
+        //events with rec_type none are deleted occurences from recurring events and should be ignored
 		if (ev.rec_type === "none") continue;
-        //event with a non empty rec_type are recurring events and should be processed
+        //events with a non empty rec_type are recurring events and should be processed
 		if (ev.rec_type)
 			processRecurringEvent(ev, exceptions, events, from, to);
         //single events and exceptions are pushed to the events array directly
