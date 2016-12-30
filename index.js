@@ -23,9 +23,12 @@ function getEvents(data, from, to){
 	//process events
 	for (var i=0; i<data.length; i++){
 		var ev = data[i];
+        //events with rec_type none are deleted occurances from recurring events and should be ignored
 		if (ev.rec_type === "none") continue;
+        //event with a non empty rec_type are recurring events and should be processed
 		if (ev.rec_type)
 			processRecurringEvent(ev, exceptions, events, from, to);
+        //single events and exceptions are pushed to the events array directly
 		else
 			if ((!from || ev.end_date>from) && (!to || ev.start_date < to))
 				events.push(ev);
@@ -34,6 +37,9 @@ function getEvents(data, from, to){
 	return events;
 }
 
+//ex: exceptions object to put exceptions on
+//key: ev.event_length (which in case of exceptions is the timestamp of the starttime of the original recurrence. in seconds!)
+//id: ev.event_pid (which refers to the id of the parent recurrent event)
 function setException(ex, key, id){
 	if (!ex[key])
 		ex[key] = {};
@@ -60,7 +66,7 @@ function processRecurringEvent(ev, exceptions, events, from, to){
 	while (start < ev.start_date || (start.valueOf()+ev.event_length*1000) <= from.valueOf())
 		start = mDate.add(start, 1, pattern, true);
 	while (start < to && start < ev.end_date){
-		var mark = getException(exceptions, start.valueOf(), ev.id);
+		var mark = getException(exceptions, (start.valueOf() / 1000), ev.id);
 		if (!mark){
 			var real_end = new Date(start.valueOf()+ev.event_length*1000);
 			var copy = {
