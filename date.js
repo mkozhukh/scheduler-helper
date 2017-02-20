@@ -1,5 +1,5 @@
 var mDate = {
-	startOnMonday:false,
+	startOnMonday:true,
 	toFixed:function(num){
 		if (num<10)	return "0"+num;
 		return num;
